@@ -92,8 +92,19 @@ const loadPhoneDetails = async id => {
     const url = `https://openapi.programming-hero.com/api/phone/${id}`;
     const res = await fetch(url);
     const data = await res.json();
-    console.log(data.data);
+    displayPhoneDetails(data.data);
 }
-// loadPhoneDetails();
+
+const displayPhoneDetails = phone => {
+    console.log(phone);
+    const modalTitle = document.getElementById('phoneDetailsModalLabel');
+    modalTitle.innerText = phone.name;
+    const phoneDetails = document.getElementById('phone-detail');
+    phoneDetails.innerHTML = `
+    <p>Replease Date : ${phone.releaseDate ? phone.releaseDate : 'No Realease Date found'}</p>
+    <p>Storage: ${phone.mainFeatures ? phone.mainFeatures.storage : 'no storage Information'}</p>
+    <p>Others: ${phone.others ? phone.others.Bluetooth : 'No Bluetoothe information'}</p>
+    `
+}
 
 // loadPhones();
